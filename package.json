@@ -28,12 +28,13 @@
     "appId": "com.electron.desktop",
     "productName": "ElectronVueVite",
     "asar": true,
-    "copyright": "Copyright © 2022 XingXingZaiXian",
+    "copyright": "Copyright © 2022 Shueyyuen",
     "directories": {
       "output": "release/${version}"
     },
     "files": [
-      "dist"
+      "dist",
+      "electron/icons"
     ],
     "mac": {
       "artifactName": "${productName}_${version}.${ext}",
@@ -42,6 +43,7 @@
       ]
     },
     "win": {
+      "icon": "electron/icons/logo.ico",
       "target": [
         {
           "target": "nsis",
@@ -56,7 +58,10 @@
       "oneClick": false,
       "perMachine": false,
       "allowToChangeInstallationDirectory": true,
-      "deleteAppDataOnUninstall": false
+      "deleteAppDataOnUninstall": false,
+      "installerIcon": "./electron/icons/logo.ico",
+      "uninstallerIcon": "./electron/icons/logo.ico",
+      "installerHeaderIcon": "./electron/icons/logo.ico"
     }
   }
 }

@@ -3,7 +3,7 @@ import path from 'path';
 
 const createWindow = () => {
   const win = new BrowserWindow({
-    // frame: false,
+    frame: false,
     // transparent: true,
     webPreferences: {
       preload: path.join(__dirname, '../electron-preload/preload.js'),
