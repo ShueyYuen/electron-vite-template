@@ -1,11 +1,14 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain, IpcMainEvent } from 'electron';
 import path from 'path';
 
 const createWindow = () => {
   const win = new BrowserWindow({
     frame: false,
+    icon: 'src/../electron/icons/logo.ico',
     // transparent: true,
     webPreferences: {
+      nodeIntegration: !!process.env.ELECTRON_NODE_INTEGRATION,
+      contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
       preload: path.join(__dirname, '../electron-preload/preload.js'),
     },
   });
@@ -18,6 +21,20 @@ const createWindow = () => {
     console.log(url);
     win.loadURL(url);
   }
+
+  ipcMain.on('window-operation', (event: IpcMainEvent, arg) => {
+    switch(arg.data) {
+      case 'close':
+        win.close();
+        break;
+      case 'min':
+        win.minimize();
+        break;
+      case 'max':
+        win.isMaximized() ? win.unmaximize() : win.maximize();
+        break;
+    }
+  });
 };
 
 app.whenReady().then(() => {
