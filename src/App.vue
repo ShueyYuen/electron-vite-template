@@ -5,12 +5,12 @@ import HelloWorld from './components/HelloWorld.vue';
 import AppTitle from './components/AppTitle.vue';
 
 const isElectron = !!window.electronAPI;
-const platform = window.electronAPI?.platform;
+const platform = window.electronAPI?.platform || 'Web';
 </script>
 
 <template>
-  <AppTitle v-if="isElectron" title="ElectronVite"></AppTitle>
-  <img alt="Vue logo" src="./assets/logo.png" />
+  <AppTitle v-if="isElectron"></AppTitle>
+  <img alt="Vue logo" src="./assets/logo.png" width="256" />
   <HelloWorld :msg="`Hello Vue 3 + TypeScript + Vite in ${platform}`" />
 </template>
 

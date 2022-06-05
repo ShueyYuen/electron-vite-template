@@ -1,9 +1,11 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from 'vue';
+import useStore from '@/store/version';
 
-defineProps<{ msg: string }>()
+defineProps<{ msg: string }>();
+const store = useStore();
 
-const count = ref(0)
+const count = ref(0);
 </script>
 
 <template>
@@ -31,6 +33,7 @@ const count = ref(0)
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
   </p>
+  <p>{{ store.version }}</p>
 </template>
 
 <style scoped>

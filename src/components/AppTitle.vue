@@ -1,5 +1,8 @@
 <script setup lang="ts">
-defineProps<{ title: string }>();
+import { useTitle } from '@vueuse/core'
+
+defineProps<{ title?: string }>();
+const htmlTitle = useTitle();
 
 const windowOperation = (e: MouseEvent) => {
   window.ipcRenderer?.send('window-operation', {
@@ -10,7 +13,7 @@ const windowOperation = (e: MouseEvent) => {
 
 <template>
   <section id="app-title" style="-webkit-app-region: drag">
-    <div class="title">{{title}}</div>
+    <div class="title">{{ title || htmlTitle }}</div>
     <div class="window" style="-webkit-app-region: no-drag;">
       <div data-event="min" class="icon" @click="windowOperation"></div>
       <div data-event="max" class="icon" @click="windowOperation"></div>
@@ -26,6 +29,8 @@ const windowOperation = (e: MouseEvent) => {
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  position: sticky;
+  top: 0;
   .title {
     letter-spacing: 1px;
     font-weight: bold;

@@ -36,4 +36,9 @@ export default defineConfig({
   build: {
     emptyOutDir: false,
   },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
 });
